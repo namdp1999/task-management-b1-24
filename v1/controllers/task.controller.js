@@ -63,7 +63,7 @@ module.exports.detail = async (req, res) => {
   res.json(task);
 };
 
-// [GET] /api/v1/tasks/change-status/:id
+// [PATCH] /api/v1/tasks/change-status/:id
 module.exports.changeStatus = async (req, res) => {
   try {
     const id = req.params.id;
@@ -88,7 +88,7 @@ module.exports.changeStatus = async (req, res) => {
   }
 };
 
-// [GET] /api/v1/tasks/change-multi
+// [PATCH] /api/v1/tasks/change-multi
 module.exports.changeMulti = async (req, res) => {
   const { ids, status } = req.body;
 
@@ -111,4 +111,15 @@ module.exports.changeMulti = async (req, res) => {
       message: `Trạng thái ${status} không hợp lệ!`
     });
   }
+};
+
+// [POST] /api/v1/tasks/create
+module.exports.create = async (req, res) => {
+  const task = new Task(req.body);
+  await task.save();
+
+  res.json({
+    code: 200,
+    message: "Tạo công việc thành công!"
+  });
 };
