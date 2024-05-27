@@ -155,3 +155,20 @@ module.exports.delete = async (req, res) => {
     message: "Xóa công việc thành công!"
   });
 };
+
+// [PATCH] /api/v1/tasks/delete-multi
+module.exports.deleteMulti = async (req, res) => {
+  const { ids } = req.body;
+
+  await Task.updateMany({
+    _id: { $in: ids }
+  }, {
+    deleted: true,
+    deletedAt: new Date()
+  });
+
+  res.json({
+    code: 200,
+    message: "Xóa các công việc thành công!"
+  });
+};
