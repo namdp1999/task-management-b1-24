@@ -138,3 +138,20 @@ module.exports.edit = async (req, res) => {
     message: "Cập nhật công việc thành công!"
   });
 };
+
+// [PATCH] /api/v1/tasks/delete/:id
+module.exports.delete = async (req, res) => {
+  const id = req.params.id;
+
+  await Task.updateOne({
+    _id: id
+  }, {
+    deleted: true,
+    deletedAt: new Date()
+  });
+
+  res.json({
+    code: 200,
+    message: "Xóa công việc thành công!"
+  });
+};
