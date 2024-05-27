@@ -123,3 +123,18 @@ module.exports.create = async (req, res) => {
     message: "Tạo công việc thành công!"
   });
 };
+
+// [PATCH] /api/v1/tasks/edit/:id
+module.exports.edit = async (req, res) => {
+  const id = req.params.id;
+  const data = req.body;
+
+  await Task.updateOne({
+    _id: id
+  }, data);
+
+  res.json({
+    code: 200,
+    message: "Cập nhật công việc thành công!"
+  });
+};
