@@ -21,4 +21,10 @@ router.get(
   controller.detail
 );
 
+router.get(
+  "/list", 
+  authMiddleware.requireAuth, 
+  controller.list
+);
+
 module.exports = router;
