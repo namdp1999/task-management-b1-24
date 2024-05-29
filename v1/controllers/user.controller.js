@@ -163,18 +163,11 @@ module.exports.passwordReset = async (req, res) => {
   });
 }
 
-// [GET] /api/v1/users/detail/:id
+// [GET] /api/v1/users/detail
 module.exports.detail = async (req, res) => {
-  const id = req.params.id;
-
-  const user = await User.findOne({
-    _id: id,
-    deleted: false
-  }).select("fullName email");
-
   res.json({
     code: 200,
-    message: "Đổi mật khẩu thành công!",
-    user: user
+    message: "Thành công!",
+    user: res.locals.user
   });
 }
